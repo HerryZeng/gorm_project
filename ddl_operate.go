@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"gorm_project/modules"
+	"gorm_project/modules/relation_tables"
 )
 
 func main() {
@@ -28,6 +28,13 @@ func main() {
 	//b2 := db.HasTable(&User{})
 	//fmt.Println(b2)
 	// 自动迁移
-	db.AutoMigrate(&modules.User{})
+	// 统一增加前缀, 只针对使用模型与表名默认规则
+	//gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
+	//	return "sys_" + defaultTableName
+	//}
+	db.AutoMigrate(&relation_tables.User{}, &relation_tables.UserProfile{},
+		relation_tables.User2{}, relation_tables.Article{}, relation_tables.Article2{}, relation_tables.Tag{})
+	//db.AutoMigrate(&modules.User{}, &modules.GormMode{}, &modules.Article{})
+	//db.AutoMigrate(&modules.User{}, &modules.UserInfo{}, &modules.DBUserInfo{}, &modules.DBXXXUserInfo{})
 
 }
