@@ -5,6 +5,7 @@ type User2 struct {
 	Name    string
 	Age     int
 	Address string
+	Article []Article `gorm:"ForeignKey:UId;AssociationForeignKey:Id"`
 }
 
 type Article struct {
@@ -12,6 +13,5 @@ type Article struct {
 	Title   string
 	Content string
 	Desc    string
-	User2   []User2 `gorm:"ForeignKey:Uid;AssociationForeignKey:Id"`
-	Uid     int
+	UId     int
 }

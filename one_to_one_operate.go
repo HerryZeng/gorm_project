@@ -17,17 +17,17 @@ func main() {
 	defer db.Close()
 
 	// 增加
-	//userProfile := relation_tables.UserProfile{
-	//	Pic:   "1.jpg",
-	//	CPic:  "2.jpg",
-	//	Phone: "1234567",
-	//	User: relation_tables.User{
-	//		Name:    "dlzeng",
-	//		Age:     23,
-	//		Address: "xxx",
-	//	},
-	//}
-	//db.Create(&userProfile)
+	userProfile := relation_tables.UserProfile{
+		Pic:   "1.jpg",
+		CPic:  "2.jpg",
+		Phone: "1234567",
+		User: relation_tables.User{
+			Name:    "dlzeng",
+			Age:     23,
+			Address: "xxx",
+		},
+	}
+	db.Create(&userProfile)
 
 	// 第一种查询 Association
 	fmt.Println("第一种查询")
@@ -61,8 +61,8 @@ func main() {
 	db.Model(&user_profile4.User).Update(relation_tables.User{Name: "Herry", Age: 44, Address: "深圳"})
 	fmt.Println(user_profile4)
 
-	var user_profile5 relation_tables.UserProfile
-	db.Preload("User").First(&user_profile5, 1)
-	fmt.Println(user_profile5)
-	db.Debug().Delete(&user_profile5.User)
+	//var user_profile5 relation_tables.UserProfile
+	//db.Preload("User").First(&user_profile5, 1)
+	//fmt.Println(user_profile5)
+	//db.Debug().Delete(&user_profile5.User)
 }
