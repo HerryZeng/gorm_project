@@ -53,4 +53,22 @@ func main() {
 	//db.Where("name = ?", "dlzeng").Find(&user9)
 	db.Debug().Not("name = ?", "Herry").Order("p_id desc").Find(&user9)
 	fmt.Println(user9)
+
+	type UserJoinUserProfile struct {
+		Id      int
+		Name    string
+		Age     int
+		Address string
+		PId     int
+		Pic     string
+		CPic    string
+		Phone   string
+	}
+
+	var userJoinUserProfile1 []UserJoinUserProfile
+	var user10 []relation_tables.User
+	db.Debug().Select("users.*,user_profiles.*").Joins("left join user_profiles on users.id = user_profiles.id").
+		Find(&user10).Scan(&userJoinUserProfile1)
+	fmt.Println(userJoinUserProfile1)
+	//fmt.Println(user10)
 }
